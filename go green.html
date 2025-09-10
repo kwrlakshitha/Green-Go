@@ -1,0 +1,880 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Green Go - Eco-Friendly Taxi & Delivery Service</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'eco-green': '#CCF2BA',
+                        'eco-light': '#E7F5D9',
+                        'eco-beige': '#F5F1E6',
+                    },
+                    fontFamily: {
+                        'poppins': ['Poppins', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .leaf-decoration {
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpath d='M20,80 Q10,50 20,20 Q50,10 80,20 Q70,50 80,80 Q50,90 20,80 Z' fill='%23CCF2BA' opacity='0.3'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-size: 150px;
+        }
+        
+        .organic-shape {
+            border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        .soft-shadow {
+            box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+        }
+        
+        .timeline-step {
+            position: relative;
+            opacity: 0;
+            transform: translateX(-50px);
+            animation: slideInLeft 0.8s ease-out forwards;
+        }
+        
+        .timeline-step:nth-child(1) { animation-delay: 0.2s; }
+        .timeline-step:nth-child(2) { animation-delay: 0.4s; }
+        .timeline-step:nth-child(3) { animation-delay: 0.6s; }
+        .timeline-step:nth-child(4) { animation-delay: 0.8s; }
+        
+        .timeline-step::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            right: -20px;
+            width: 40px;
+            height: 2px;
+            background: linear-gradient(to right, #CCF2BA, #E7F5D9);
+        }
+        
+        .timeline-step:last-child::after {
+            display: none;
+        }
+        
+        .hover-lift {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .hover-lift:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.12);
+        }
+
+        /* Fade in animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 0.8s ease-out forwards;
+        }
+
+        .fade-in-delay-1 { animation-delay: 0.2s; }
+        .fade-in-delay-2 { animation-delay: 0.4s; }
+        .fade-in-delay-3 { animation-delay: 0.6s; }
+        .fade-in-delay-4 { animation-delay: 0.8s; }
+        .fade-in-delay-5 { animation-delay: 1.0s; }
+        .fade-in-delay-6 { animation-delay: 1.2s; }
+
+        /* Scale in animations */
+        .scale-in {
+            opacity: 0;
+            transform: scale(0.8);
+            animation: scaleIn 0.6s ease-out forwards;
+        }
+
+        /* Slide animations */
+        .slide-in-left {
+            opacity: 0;
+            transform: translateX(-50px);
+            animation: slideInLeft 0.8s ease-out forwards;
+        }
+
+        .slide-in-right {
+            opacity: 0;
+            transform: translateX(50px);
+            animation: slideInRight 0.8s ease-out forwards;
+        }
+
+        /* Bounce animation for buttons */
+        .bounce-in {
+            animation: bounceIn 0.8s ease-out;
+        }
+
+        /* Pulse animation for impact numbers */
+        .pulse-grow {
+            animation: pulseGrow 2s ease-in-out infinite;
+        }
+
+        /* Rotating animation for icons */
+        .rotate-slow {
+            animation: rotateSlow 20s linear infinite;
+        }
+
+        /* Keyframe animations */
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes scaleIn {
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        @keyframes slideInLeft {
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes slideInRight {
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes bounceIn {
+            0% {
+                opacity: 0;
+                transform: scale(0.3);
+            }
+            50% {
+                opacity: 1;
+                transform: scale(1.05);
+            }
+            70% {
+                transform: scale(0.9);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-20px);
+            }
+        }
+
+        @keyframes pulseGrow {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+        }
+
+        @keyframes rotateSlow {
+            from {
+                transform: rotate(0deg);
+            }
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* Stagger animation for team cards */
+        .team-card {
+            opacity: 0;
+            transform: translateY(50px);
+            animation: fadeInUp 0.8s ease-out forwards;
+        }
+
+        .team-card:nth-child(1) { animation-delay: 0.1s; }
+        .team-card:nth-child(2) { animation-delay: 0.2s; }
+        .team-card:nth-child(3) { animation-delay: 0.3s; }
+        .team-card:nth-child(4) { animation-delay: 0.4s; }
+        .team-card:nth-child(5) { animation-delay: 0.5s; }
+        .team-card:nth-child(6) { animation-delay: 0.6s; }
+
+        /* Service cards animation */
+        .service-card {
+            opacity: 0;
+            transform: scale(0.9);
+            animation: scaleIn 0.8s ease-out forwards;
+        }
+
+        .service-card:nth-child(1) { animation-delay: 0.2s; }
+        .service-card:nth-child(2) { animation-delay: 0.4s; }
+
+        /* Navigation slide down */
+        .nav-slide-down {
+            transform: translateY(-100%);
+            animation: slideDown 0.5s ease-out forwards;
+        }
+
+        @keyframes slideDown {
+            to {
+                transform: translateY(0);
+            }
+        }
+
+        /* Hero text animations */
+        .hero-title {
+            opacity: 0;
+            transform: translateY(50px);
+            animation: fadeInUp 1s ease-out 0.3s forwards;
+        }
+
+        .hero-subtitle {
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 1s ease-out 0.6s forwards;
+        }
+
+        .hero-buttons {
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 1s ease-out 0.9s forwards;
+        }
+
+        /* Contact form animation */
+        .contact-form {
+            opacity: 0;
+            transform: translateX(-50px);
+            animation: slideInLeft 0.8s ease-out 0.2s forwards;
+        }
+
+        .contact-info {
+            opacity: 0;
+            transform: translateX(50px);
+            animation: slideInRight 0.8s ease-out 0.4s forwards;
+        }
+
+        /* Footer animation */
+        .footer-content {
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 0.8s ease-out forwards;
+        }
+    </style>
+</head>
+<body class="font-poppins bg-white">
+    <!-- Navigation Bar -->
+    <nav class="fixed top-0 left-0 right-0 bg-white/95 backdrop-blur-sm border-b border-eco-green/20 z-50 nav-slide-down">
+        <div class="container mx-auto px-6">
+            <div class="flex items-center justify-between h-16">
+                <!-- Logo -->
+                <div class="flex items-center space-x-2">
+                    <div class="w-10 h-10 rounded-full overflow-hidden flex items-center justify-center">
+                        <img src="go green.png" alt="Green Go logo" class="w-full h-full object-cover" />
+                    </div>
+                    <span class="text-2xl font-bold text-gray-800">Green Go</span>
+                </div>
+                
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#home" class="text-gray-700 hover:text-green-600 font-medium transition-colors">Home</a>
+                    <a href="#about" class="text-gray-700 hover:text-green-600 font-medium transition-colors">About</a>
+                    <a href="#team" class="text-gray-700 hover:text-green-600 font-medium transition-colors">Team</a>
+                    <a href="#services" class="text-gray-700 hover:text-green-600 font-medium transition-colors">Services</a>
+                    <a href="#how-it-works" class="text-gray-700 hover:text-green-600 font-medium transition-colors">How It Works</a>
+                    <a href="#impact" class="text-gray-700 hover:text-green-600 font-medium transition-colors">Impact</a>
+                    <a href="#contact" class="text-gray-700 hover:text-green-600 font-medium transition-colors">Contact</a>
+                    <button class="bg-green-600 hover:bg-green-700 text-white px-6 py-2 rounded-full font-semibold transition-colors">
+                        Book Now
+                    </button>
+                </div>
+                
+                <!-- Mobile Menu Button -->
+                <button id="mobileMenuBtn" class="md:hidden p-2">
+                    <svg class="w-6 h-6 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                </button>
+            </div>
+            
+            <!-- Mobile Menu -->
+            <div id="mobileMenu" class="md:hidden hidden bg-white border-t border-eco-green/20">
+                <div class="py-4 space-y-2">
+                    <a href="#home" class="block px-4 py-2 text-gray-700 hover:bg-eco-light rounded-lg transition-colors">Home</a>
+                    <a href="#about" class="block px-4 py-2 text-gray-700 hover:bg-eco-light rounded-lg transition-colors">About</a>
+                    <a href="#team" class="block px-4 py-2 text-gray-700 hover:bg-eco-light rounded-lg transition-colors">Team</a>
+                    <a href="#services" class="block px-4 py-2 text-gray-700 hover:bg-eco-light rounded-lg transition-colors">Services</a>
+                    <a href="#how-it-works" class="block px-4 py-2 text-gray-700 hover:bg-eco-light rounded-lg transition-colors">How It Works</a>
+                    <a href="#impact" class="block px-4 py-2 text-gray-700 hover:bg-eco-light rounded-lg transition-colors">Impact</a>
+                    <a href="#contact" class="block px-4 py-2 text-gray-700 hover:bg-eco-light rounded-lg transition-colors">Contact</a>
+                    <div class="px-4 py-2">
+                        <button class="w-full bg-green-600 hover:bg-green-700 text-white py-2 rounded-full font-semibold transition-colors">
+                            Book Now
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+<section id="home" class="relative bg-eco-beige min-h-screen flex items-center leaf-decoration pt-16" style="background-image: url('3.jpg'); background-repeat: no-repeat; background-size: cover; background-position: center; ">        
+    <div class="container mx-auto px-6 py-20">
+            <div class="max-w-4xl mx-auto text-center">
+                <h1 class="text-6xl md:text-7xl font-bold text-gray-300 mb-6 leading-tight hero-title">
+                    Ride Green.<br>
+                    <span class="text-green-600">Deliver Clean.</span>
+                </h1>
+                <p class="text-xl md:text-2xl text-gray-50 font-light mb-12 max-w-3xl mx-auto hero-subtitle">
+                    Sustainable urban mobility that cares for our planet. Experience eco-friendly transportation and delivery services that make a difference.
+                </p>
+                <div class="flex flex-col md:flex-row gap-4 justify-center items-center hero-buttons">
+                    <button class="bg-green-600 hover:bg-green-700 text-white px-8 py-4 rounded-full text-lg font-semibold transition-all duration-300 hover-lift">
+                        🚗 Book a Ride
+                    </button>
+                    <button class="bg-eco-green hover:bg-green-400 text-gray-800 px-8 py-4 rounded-full text-lg font-semibold transition-all duration-300 hover-lift">
+                        📦 Request a Delivery
+                    </button>
+                    <button class="border-2 border-green-600 text-green-600 hover:bg-green-600 hover:text-white px-8 py-4 rounded-full text-lg font-semibold transition-all duration-300 hover-lift">
+                        📱 Download Our App
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Decorative leaf shapes -->
+        <div class="absolute top-10 left-10 w-20 h-20 bg-eco-green opacity-30 organic-shape"></div>
+        <div class="absolute bottom-20 right-20 w-32 h-32 bg-eco-light opacity-40 organic-shape"></div>
+    </section>
+
+    <!-- About Green Go -->
+    <section id="about" class="py-20 bg-white">
+        <div class="container mx-auto px-6">
+            <div class="grid md:grid-cols-2 gap-12 items-center max-w-6xl mx-auto">
+                <div class="relative">
+                    <div class="bg-eco-light p-8 rounded-3xl soft-shadow">
+                        <img src="2.jpg" alt="Electric car illustration" class="w-full h-auto rounded-3xl object-cover" />
+                    </div>
+                </div>
+                <div>
+                    <h2 class="text-4xl md:text-5xl font-bold text-gray-800 mb-6 fade-in">Our Mission</h2>
+                    <p class="text-xl text-gray-600 font-light mb-8 leading-relaxed fade-in fade-in-delay-1">
+                        Making transportation clean, affordable, and accessible for everyone. We believe in a future where mobility doesn't compromise our planet's health.
+                    </p>
+                    <div class="bg-eco-beige p-6 rounded-2xl soft-shadow fade-in fade-in-delay-2">
+                        <h3 class="text-2xl font-semibold text-green-700 mb-3">🌍 Our Vision</h3>
+                        <p class="text-lg text-gray-700">Leading eco-mobility transformation by 2030</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Our Team -->
+    <section id="team" class="py-20 bg-eco-light">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-bold text-gray-800 mb-6 fade-in">Our Team</h2>
+                <p class="text-xl text-gray-600 font-light max-w-2xl mx-auto fade-in fade-in-delay-1">
+                    Meet the passionate individuals driving Green Go's mission to transform urban mobility
+                </p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+                <!-- CEO -->
+                <div class="bg-white rounded-3xl soft-shadow hover-lift overflow-hidden team-card">
+                    <img src="p3.jpg" alt="Malindu - CEO" class="w-full h-80 object-cover">
+                    <div class="px-4 py-3 text-center">
+                        <h3 class="text-lg font-semibold text-gray-800 mb-1">Malindu</h3>
+                        <p class="text-green-600 font-medium mb-2">CEO</p>
+                        <p class="text-gray-600 text-sm leading-relaxed">
+                            Leads company vision and strategy, driving Green Go's mission to scale sustainable mobility.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Chief Marketing Officer -->
+                <div class="bg-white rounded-3xl soft-shadow hover-lift overflow-hidden team-card">
+                    <img src="p1.jpg" alt="Janith - Chief Marketing Officer" class="w-full h-80 object-cover">
+                    <div class="px-4 py-3 text-center">
+                        <h3 class="text-lg font-semibold text-gray-800 mb-1">Janith</h3>
+                        <p class="text-green-600 font-medium mb-2">Chief Marketing Officer</p>
+                        <p class="text-gray-600 text-sm leading-relaxed">
+                            Heads brand, growth, and communications to expand Green Go's reach and impact.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Chief Financial Officer -->
+                <div class="bg-white rounded-3xl soft-shadow hover-lift overflow-hidden team-card">
+                    <img src="p2.jpg" alt="Menuri - Chief Financial Officer" class="w-full h-80 object-cover">
+                    <div class="px-4 py-3 text-center">
+                        <h3 class="text-lg font-semibold text-gray-800 mb-1">Menuri</h3>
+                        <p class="text-green-600 font-medium mb-2">Chief Financial Officer</p>
+                        <p class="text-gray-600 text-sm leading-relaxed">
+                            Oversees financial planning, reporting, and sustainability-linked investment strategies.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Chief Operations Officer -->
+                <div class="bg-white rounded-3xl soft-shadow hover-lift overflow-hidden team-card">
+                    <img src="p5.jpg" alt="Edwin - Chief Operations Officer" class="w-full h-80 object-cover">
+                    <div class="px-4 py-3 text-center">
+                        <h3 class="text-lg font-semibold text-gray-800 mb-1">Edwin</h3>
+                        <p class="text-green-600 font-medium mb-2">Chief Operations Officer</p>
+                        <p class="text-gray-600 text-sm leading-relaxed">
+                            Ensures smooth driver and delivery operations with a focus on efficiency and safety.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Chief IT Officer -->
+                <div class="bg-white rounded-3xl soft-shadow hover-lift overflow-hidden team-card">
+                    <img src="p6.jpg" alt="Mumthaz - Chief IT Officer" class="w-full h-80 object-cover">
+                    <div class="px-4 py-3 text-center">
+                        <h3 class="text-lg font-semibold text-gray-800 mb-1">Mumthaz</h3>
+                        <p class="text-green-600 font-medium mb-2">Chief IT Officer</p>
+                        <p class="text-gray-600 text-sm leading-relaxed">
+                            Leads platform engineering, app development, and data initiatives.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Chief HR Officer -->
+                <div class="bg-white rounded-3xl soft-shadow hover-lift overflow-hidden team-card">
+                    <img src="p4.jpg" alt="Navodya - Chief HR Officer" class="w-full h-80 object-cover">
+                    <div class="px-4 py-3 text-center">
+                        <h3 class="text-lg font-semibold text-gray-800 mb-1">Navodya</h3>
+                        <p class="text-green-600 font-medium mb-2">Chief HR Officer</p>
+                        <p class="text-gray-600 text-sm leading-relaxed">
+                            Manages talent, culture, and driver-partner wellbeing across the organization.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- Our Services -->
+    <section id="services" class="py-20" style="background-color: #b0ffc6;">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-bold text-gray-800 mb-6 fade-in">Our Services</h2>
+                <p class="text-xl text-gray-600 font-light max-w-2xl mx-auto fade-in fade-in-delay-1">
+                    Comprehensive eco-friendly solutions for all your transportation and delivery needs
+                </p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+                <!-- Eco Taxi Rides -->
+                <div class="bg-white p-8 rounded-3xl soft-shadow hover-lift service-card">
+                    <div class="text-center">
+                        <div class="w-20 h-20 bg-eco-green rounded-full flex items-center justify-center mx-auto mb-6 rotate-slow">
+                            <svg viewBox="0 0 24 24" class="w-10 h-10 text-green-700">
+                                <path fill="currentColor" d="M18.92 6.01C18.72 5.42 18.16 5 17.5 5h-11c-.66 0-1.22.42-1.42 1.01L3 12v8c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-1h12v1c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-8l-2.08-5.99zM6.5 16c-.83 0-1.5-.67-1.5-1.5S5.67 13 6.5 13s1.5.67 1.5 1.5S7.33 16 6.5 16zm11 0c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zM5 11l1.5-4.5h11L19 11H5z"/>
+                            </svg>
+                        </div>
+                        <h3 class="text-2xl font-semibold text-gray-800 mb-4">🚗 Eco Taxi Rides</h3>
+                        <p class="text-gray-600 mb-6">100% electric vehicles with GPS tracking and verified eco-conscious drivers</p>
+                        <ul class="text-left text-gray-600 space-y-2">
+                            <li>✅ Real-time GPS tracking</li>
+                            <li>✅ Verified green drivers</li>
+                            <li>✅ Zero emissions guarantee</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Green Deliveries -->
+                <div class="bg-white p-8 rounded-3xl soft-shadow hover-lift service-card">
+                    <div class="text-center">
+                        <div class="w-20 h-20 bg-eco-green rounded-full flex items-center justify-center mx-auto mb-6 rotate-slow">
+                            <svg viewBox="0 0 24 24" class="w-10 h-10 text-green-700">
+                                <path fill="currentColor" d="M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M11,14H9V12H11V10H13V12H15V14H13V16H11V14Z"/>
+                            </svg>
+                        </div>
+                        <h3 class="text-2xl font-semibold text-gray-800 mb-4">📦 Green Deliveries</h3>
+                        <p class="text-gray-600 mb-6">Same-day eco-friendly delivery with real-time updates and carbon-neutral packaging</p>
+                        <ul class="text-left text-gray-600 space-y-2">
+                            <li>✅ Same-day delivery</li>
+                            <li>✅ Real-time updates</li>
+                            <li>✅ Eco-friendly packaging</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works -->
+    <section id="how-it-works" class="py-20 bg-white">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-bold text-gray-800 mb-6 fade-in">How It Works</h2>
+                <p class="text-xl text-gray-600 font-light fade-in fade-in-delay-1">Simple steps to start your eco-friendly journey</p>
+            </div>
+            
+            <div class="max-w-6xl mx-auto">
+                <div class="grid md:grid-cols-2 gap-12 items-center">
+                    <!-- Phone mockup -->
+                    <div class="relative">
+                        <div class="bg-gray-800 p-4 rounded-3xl soft-shadow max-w-sm mx-auto scale-in">
+                            <div class="bg-eco-beige rounded-2xl p-6 h-96">
+                                <div class="text-center">
+                                    <div class="w-12 h-12 bg-green-600 rounded-full mx-auto mb-4 flex items-center justify-center">
+                                        <span class="text-white font-bold">🌱</span>
+                                    </div>
+                                    <h3 class="text-lg font-semibold text-gray-800 mb-4">Green Go App</h3>
+                                    <div class="space-y-3">
+                                        <div class="bg-white p-3 rounded-xl">
+                                            <span class="text-sm text-gray-600">🚗 Book Eco Ride</span>
+                                        </div>
+                                        <div class="bg-white p-3 rounded-xl">
+                                            <span class="text-sm text-gray-600">📦 Green Delivery</span>
+                                        </div>
+                                        <div class="bg-eco-green p-3 rounded-xl">
+                                            <span class="text-sm text-gray-800">Track Your Impact</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Steps -->
+                    <div class="space-y-8">
+                        <div class="timeline-step flex items-center">
+                            <div class="w-16 h-16 bg-eco-green rounded-full flex items-center justify-center mr-6 flex-shrink-0">
+                                <span class="text-2xl">📱</span>
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-semibold text-gray-800 mb-2">1. Open App</h3>
+                                <p class="text-gray-600">Download and launch the Green Go app</p>
+                            </div>
+                        </div>
+                        
+                        <div class="timeline-step flex items-center">
+                            <div class="w-16 h-16 bg-eco-green rounded-full flex items-center justify-center mr-6 flex-shrink-0">
+                                <span class="text-2xl">🎯</span>
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-semibold text-gray-800 mb-2">2. Select Service</h3>
+                                <p class="text-gray-600">Choose between Eco Ride or Green Delivery</p>
+                            </div>
+                        </div>
+                        
+                        <div class="timeline-step flex items-center">
+                            <div class="w-16 h-16 bg-eco-green rounded-full flex items-center justify-center mr-6 flex-shrink-0">
+                                <span class="text-2xl">📝</span>
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-semibold text-gray-800 mb-2">3. Enter Details</h3>
+                                <p class="text-gray-600">Add pickup/delivery location and preferences</p>
+                            </div>
+                        </div>
+                        
+                        <div class="timeline-step flex items-center">
+                            <div class="w-16 h-16 bg-green-600 rounded-full flex items-center justify-center mr-6 flex-shrink-0">
+                                <span class="text-2xl text-white">✅</span>
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-semibold text-gray-800 mb-2">4. Go Green!</h3>
+                                <p class="text-gray-600">Confirm your booking and make a positive impact</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sustainability Impact -->
+    <section id="impact" class="py-20" style="background-color: #b0ffc6;">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-bold text-gray-800 mb-6 fade-in">Our Impact</h2>
+                <p class="text-xl text-gray-600 font-light fade-in fade-in-delay-1">Making a real difference for our planet</p>
+            </div>
+            
+            <div class="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+                <div class="bg-white p-8 rounded-3xl soft-shadow text-center hover-lift fade-in fade-in-delay-1">
+                    <div class="text-4xl mb-4">🌱</div>
+                    <h3 class="text-3xl font-bold text-green-600 mb-2 pulse-grow">5,000kg</h3>
+                    <p class="text-gray-600">CO₂ saved monthly</p>
+                </div>
+                
+                <div class="bg-white p-8 rounded-3xl soft-shadow text-center hover-lift fade-in fade-in-delay-2">
+                    <div class="text-4xl mb-4">⚡</div>
+                    <h3 class="text-3xl font-bold text-green-600 mb-2 pulse-grow">100%</h3>
+                    <p class="text-gray-600">Electric fleet</p>
+                </div>
+                
+                <div class="bg-white p-8 rounded-3xl soft-shadow text-center hover-lift fade-in fade-in-delay-3">
+                    <div class="text-4xl mb-4">🌳</div>
+                    <h3 class="text-3xl font-bold text-green-600 mb-2 pulse-grow">50+</h3>
+                    <p class="text-gray-600">Tree-planting partners</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Us -->
+    <section id="contact" class="py-20 bg-white">
+        <div class="container mx-auto px-6">
+            <div class="max-w-4xl mx-auto">
+                <div class="text-center mb-16">
+                    <h2 class="text-4xl md:text-5xl font-bold text-gray-800 mb-6 fade-in">Contact Us</h2>
+                    <p class="text-xl text-gray-600 font-light fade-in fade-in-delay-1">Get in touch and join the green movement</p>
+                </div>
+                
+                <div class="grid md:grid-cols-2 gap-12">
+                    <!-- Contact Form -->
+                    <div class="bg-eco-light p-8 rounded-3xl soft-shadow contact-form">
+                        <form id="contactForm" class="space-y-6">
+                            <div>
+                                <label class="block text-gray-700 font-semibold mb-2">Name</label>
+                                <input type="text" id="name" class="w-full p-4 rounded-xl border border-gray-200 focus:border-green-500 focus:outline-none transition-colors" placeholder="Your name">
+                            </div>
+                            <div>
+                                <label class="block text-gray-700 font-semibold mb-2">Email</label>
+                                <input type="email" id="email" class="w-full p-4 rounded-xl border border-gray-200 focus:border-green-500 focus:outline-none transition-colors" placeholder="your@email.com">
+                            </div>
+                            <div>
+                                <label class="block text-gray-700 font-semibold mb-2">Message</label>
+                                <textarea id="message" rows="4" class="w-full p-4 rounded-xl border border-gray-200 focus:border-green-500 focus:outline-none transition-colors" placeholder="Your message..."></textarea>
+                            </div>
+                            <button type="submit" class="w-full bg-green-600 hover:bg-green-700 text-white py-4 rounded-xl font-semibold transition-colors">
+                                Send Message 🌱
+                            </button>
+                        </form>
+                    </div>
+                    
+                    <!-- Contact Info -->
+                    <div class="space-y-8 contact-info">
+                        <div class="flex items-center space-x-4">
+                            <div class="w-12 h-12 bg-eco-green rounded-full flex items-center justify-center">
+                                <span class="text-xl">📧</span>
+                            </div>
+                            <div>
+                                <h3 class="font-semibold text-gray-800">Email</h3>
+                                <p class="text-gray-600">hello@greengo.eco</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-center space-x-4">
+                            <div class="w-12 h-12 bg-eco-green rounded-full flex items-center justify-center">
+                                <span class="text-xl">📞</span>
+                            </div>
+                            <div>
+                                <h3 class="font-semibold text-gray-800">Phone</h3>
+                                <p class="text-gray-600">+1 (555) ECO-RIDE</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-center space-x-4">
+                            <div class="w-12 h-12 bg-eco-green rounded-full flex items-center justify-center">
+                                <span class="text-xl">📍</span>
+                            </div>
+                            <div>
+                                <h3 class="font-semibold text-gray-800">Location</h3>
+                                <p class="text-gray-600">Green City, Eco District</p>
+                            </div>
+                        </div>
+                        
+                        <!-- Social Media -->
+                        <div class="pt-8">
+                            <h3 class="font-semibold text-gray-800 mb-4">Follow Us</h3>
+                            <div class="flex space-x-4">
+                                <button class="w-12 h-12 bg-blue-600 text-white rounded-full hover:bg-blue-700 transition-colors">
+                                    <span class="text-lg">f</span>
+                                </button>
+                                <button class="w-12 h-12 bg-pink-600 text-white rounded-full hover:bg-pink-700 transition-colors">
+                                    <span class="text-lg">📷</span>
+                                </button>
+                                <button class="w-12 h-12 bg-blue-800 text-white rounded-full hover:bg-blue-900 transition-colors">
+                                    <span class="text-lg">in</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="text-white py-12" style="background-color: #041c03;">
+        <div class="container mx-auto px-6">
+            <div class="grid md:grid-cols-4 gap-8 mb-8 footer-content">
+                <div>
+                    <div class="flex items-center space-x-2 mb-4">
+                        <div class="w-12 h-12 bg-white rounded-full overflow-hidden flex items-center justify-center">
+                            <img src="green go.jpg" alt="Green Go logo" class="w-full h-full object-cover" />
+                        </div>
+                        <span class="text-xl font-bold">Green Go</span>
+                    </div>
+                    <p class="text-green-100">Sustainable urban mobility for a cleaner future.</p>
+                </div>
+                
+                <div>
+                    <h4 class="font-semibold mb-4">Quick Links</h4>
+                    <ul class="space-y-2 text-green-100">
+                        <li><a href="#home" class="hover:text-white transition-colors">Home</a></li>
+                        <li><a href="#services" class="hover:text-white transition-colors">Services</a></li>
+                        <li><a href="#about" class="hover:text-white transition-colors">About Us</a></li>
+                        <li><a href="#team" class="hover:text-white transition-colors">Team</a></li>
+                        <li><a href="#contact" class="hover:text-white transition-colors">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="font-semibold mb-4">Legal</h4>
+                    <ul class="space-y-2 text-green-100">
+                        <li><a href="#" class="hover:text-white transition-colors">Privacy Policy</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Terms of Use</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Cookie Policy</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="font-semibold mb-4">Connect</h4>
+                    <div class="flex space-x-3">
+                        <a href="#" class="w-10 h-10 bg-white bg-opacity-20 rounded-full flex items-center justify-center hover:bg-opacity-30 transition-all">
+                            <span>f</span>
+                        </a>
+                        <a href="#" class="w-10 h-10 bg-white bg-opacity-20 rounded-full flex items-center justify-center hover:bg-opacity-30 transition-all">
+                            <span>📷</span>
+                        </a>
+                        <a href="#" class="w-10 h-10 bg-white bg-opacity-20 rounded-full flex items-center justify-center hover:bg-opacity-30 transition-all">
+                            <span>in</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="border-t border-green-400 pt-8 text-green-100">
+                <div class="container mx-auto px-6 flex flex-col md:flex-row items-center justify-between">
+                    <p class="mb-2 md:mb-0">&copy; 2025 Green Go. All rights reserved.</p>
+                    <p class="mb-0">
+                        <a href="https://rhapex.com" target="_blank" rel="noopener noreferrer" class="text-green-100 hover:underline">
+                            Developed by RHAPEX
+                        </a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Contact form functionality
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const message = document.getElementById('message').value;
+            
+            if (name && email && message) {
+                // Create success message
+                const successDiv = document.createElement('div');
+                successDiv.className = 'bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded-xl mt-4';
+                successDiv.innerHTML = `
+                    <strong>Thank you, ${name}!</strong> Your message has been received. We'll get back to you soon! 🌱
+                `;
+                
+                // Replace form with success message
+                const form = document.getElementById('contactForm');
+                form.parentNode.replaceChild(successDiv, form);
+            } else {
+                // Show error message
+                const errorDiv = document.createElement('div');
+                errorDiv.className = 'bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded-xl mt-4';
+                errorDiv.innerHTML = 'Please fill in all fields.';
+                
+                // Remove any existing error messages
+                const existingError = document.querySelector('.bg-red-100');
+                if (existingError) {
+                    existingError.remove();
+                }
+                
+                // Add error message
+                document.getElementById('contactForm').appendChild(errorDiv);
+                
+                // Remove error message after 3 seconds
+                setTimeout(() => {
+                    errorDiv.remove();
+                }, 3000);
+            }
+        });
+
+        // Smooth scrolling for internal links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Mobile menu functionality
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const mobileMenu = document.getElementById('mobileMenu');
+        
+        mobileMenuBtn.addEventListener('click', function() {
+            mobileMenu.classList.toggle('hidden');
+        });
+        
+        // Close mobile menu when clicking on a link
+        document.querySelectorAll('#mobileMenu a').forEach(link => {
+            link.addEventListener('click', function() {
+                mobileMenu.classList.add('hidden');
+            });
+        });
+
+        // Button click handlers
+        document.querySelectorAll('button').forEach(button => {
+            if (button.type !== 'submit' && button.id !== 'mobileMenuBtn') {
+                button.addEventListener('click', function() {
+                    const buttonText = this.textContent.trim();
+                    
+                    // Create a temporary notification
+                    const notification = document.createElement('div');
+                    notification.className = 'fixed top-4 right-4 bg-green-600 text-white px-6 py-3 rounded-xl shadow-lg z-50 transform translate-x-full transition-transform duration-300';
+                    notification.innerHTML = `${buttonText} clicked! 🌱`;
+                    
+                    document.body.appendChild(notification);
+                    
+                    // Animate in
+                    setTimeout(() => {
+                        notification.classList.remove('translate-x-full');
+                    }, 100);
+                    
+                    // Remove after 3 seconds
+                    setTimeout(() => {
+                        notification.classList.add('translate-x-full');
+                        setTimeout(() => {
+                            notification.remove();
+                        }, 300);
+                    }, 3000);
+                });
+            }
+        });
+    </script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'96a856cc84a57156',t:'MTc1NDQxODM0Ny4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
